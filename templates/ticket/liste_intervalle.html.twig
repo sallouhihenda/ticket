@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des tickets{% endblock %}
+
+{% block body %}
+    {% if tickets %}
+        <table id="tickets" class="table table-striped">
+            <thead>
+            <tr>
+                <th>titre</th>
+                <th>nom de la personne qui à réclamè</th>
+                <th>description</th>
+                <th>statu</th>
+                <th>date de création</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for ticket in tickets %}
+                {% if ticket.date|date('y-m-d')>date_min and ticket.date|date('y-m-d')<date_max %}
+                <tr>
+                    <td>{{ ticket.titre }}</td>
+                    <td>{{ ticket.nom }}</td>
+
+                    <td>{{ ticket.description }}</td>
+                    <td>{{ ticket.statut}}</td>
+                    <td>{{ ticket.date|date('y-m-d') }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div>
+            <h1>#pas de tickets#</h1>
+        </div>
+    {% endif %}
+{% endblock %}
